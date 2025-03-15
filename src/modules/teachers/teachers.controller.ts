@@ -1,20 +1,27 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { TeachersService } from './teachers.service';
 import { CreateTeacherDto } from './dto/create-teacher.dto';
 import { UpdateTeacherDto } from './dto/update-teacher.dto';
+import { ResponseMessage } from '@/decorator/customize';
 
 @Controller('teachers')
 export class TeachersController {
-  constructor(private readonly teachersService: TeachersService) {}
+  constructor(private readonly teachersService: TeachersService) { }
 
   @Post()
   create(@Body() createTeacherDto: CreateTeacherDto) {
     return this.teachersService.create(createTeacherDto);
   }
 
+  @ResponseMessage("Get all teachers")
   @Get()
-  findAll() {
-    return this.teachersService.findAll();
+  findAll(
+    @Query('current') current: string,
+    @Query('pageSize') pageSize: string,
+    @Query('classId') classId: string,
+    @Query('search') search: string,
+  ) {
+    return this.teachersService.findAll(+current, +pageSize, +classId, search);
   }
 
   @Get(':id')
