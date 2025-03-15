@@ -32,7 +32,7 @@ root/
 ## 🔧 Setup & Installation
 ### 1️⃣ Clone the repository:
 ```sh
-git clone https://github.com/your-username/school-management-api.git
+git clone https://github.com/TinhNguyenTB/school-management-backend.git
 cd school-management-api
 ```
 ### 2️⃣ Install dependencies:
